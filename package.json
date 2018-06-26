@@ -1,0 +1,39 @@
+{
+  "name": "cruise-ships",
+  "version": "1.0.0",
+  "description": "Domain Name Modelling",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gmiellis/cruise-ships.git"
+  },
+  "keywords": [
+    "Domain",
+    "Name",
+    "Modelling",
+    "Object-orientated",
+    "Programming",
+    "Single",
+    "Responsibility",
+    "Principle",
+    "Dependency",
+    "Inversion",
+    "Mocks",
+    "Spies"
+  ],
+  "author": "Gaz Ellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmiellis/cruise-ships/issues"
+  },
+  "homepage": "https://github.com/gmiellis/cruise-ships#readme",
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "eslint-config-mcr-codes": "^1.0.1",
+    "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.2.0"
+  }
+}
