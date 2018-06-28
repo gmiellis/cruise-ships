@@ -19,7 +19,7 @@ describe('constructor', () => {
 
     const cShip = new CruiseShip('Horizon Chaser');
 
-    expect(cShip.passengerCapacity).toEqual(100);
+    expect(cShip.passengerCapacity).toEqual(0);
   });
 
   it('has initial passenger capacity of 0', () => {
@@ -40,7 +40,21 @@ describe('constructor', () => {
 
     const cShip = new CruiseShip('Horizon Chaser');
 
-    expect(cShip.homePort).toBe('Liverpool');
+    expect(cShip.homePort).toBe('');
+  });
+
+});
+
+describe('new ship stats', () => {
+
+  it('sets capacity & max knots of new ship', () => {
+
+    const cShip = new CruiseShip('Horizon Chaser');
+    cShip.sStats(100, 20, 'Liverpool');
+
+    expect(cShip.passengerCapacity).toEqual(100);
+    expect(cShip.maxKnots).toEqual(20);
+    expect(cShip.homePort).toEqual('Liverpool');
   });
 
 });
@@ -54,6 +68,15 @@ describe('embarkation', () => {
 
     expect(cShip.currentPassengers).toEqual(50);
   });
+
+  // it('alerts if no more capacity', () => {
+
+    // const cShip = new CruiseShip('Horizon Chaser');
+    // cShip.sStats(200, 22, 'Vancouver');
+    // cShip.embark(175);
+
+    // expect(cShip.embark(30)).toThrow('NO CAPACITY AVAILABLE');
+  // });
 
 });
 
@@ -80,4 +103,18 @@ describe('walk the plank', () => {
 
     expect(cShip.currentPassengers).toEqual(70);
   });
+});
+
+describe('ship sets sail', () => {
+
+  it('it marks the home port as blank', () => {
+
+    const cShip = new CruiseShip('Horizon Chaser');
+    cShip.sStats(200, 22, 'Liverpool')
+    cShip.embark(77);
+    cShip.setSail();
+
+    expect(cShip.homePort).toBeFalsy();
+  });
+
 });
