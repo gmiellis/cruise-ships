@@ -4,7 +4,7 @@ function CruiseShip(name) {
   this.passengerCapacity = 100;
   this.currentPassengers = 0;
   this.maxKnots = 0;
-  this.homePort = '';
+  this.homePort = 'Liverpool';
 
 }
 
