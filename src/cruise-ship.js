@@ -4,4 +4,10 @@ function Ship(startingPoint) {
 
 }
 
+Ship.prototype.setSail = function () {
+
+  this.startingPoint = '';
+
+};
+
 module.exports = Ship;

@@ -15,3 +15,14 @@ describe('constructor', () => {
     expect(ship.startingPoint).toBe('Vancouver');
   });
 });
+
+describe('set sail', () => {
+
+  it('removes the home port', () => {
+
+    const ship = new Ship('Vancouver');
+    ship.setSail();
+
+    expect(ship.startingPoint).toBeFalsy();
+  });
+});
