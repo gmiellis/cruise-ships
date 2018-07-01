@@ -10,7 +10,7 @@ describe('constructor', () => {
     const port = new Port('Vancouver');
     const itinerary = new Itinerary([port]);
     const ship = new Ship(itinerary);
-    
+
     expect(ship).toBeInstanceOf(Object);
   });
 
@@ -26,15 +26,30 @@ describe('constructor', () => {
 
 describe('set sail', () => {
 
-  it('removes the home port', () => {
+  it('it can set sail', () => {
 
-    const port = new Port('Vancouver');
-    const itinerary = new Itinerary([port]);
+    const van = new Port('Vancouver');
+    const sf = new Port('San Francisco');
+    const itinerary = new Itinerary([van, sf]);
     const ship = new Ship(itinerary);
+
     ship.setSail();
 
     expect(ship.currentPort).toBeFalsy();
-    expect(port.ships).not.toContain(ship);
+    expect(van.ships).not.toContain(ship);
+  });
+
+  it('it cant sail further than its itinerary', () => {
+
+    const van = new Port('Vancouver');
+    const sf = new Port('San Francisco');
+    const itinerary = new Itinerary([van, sf]);
+    const ship = new Ship(itinerary);
+
+    ship.setSail();
+    ship.dock();
+
+    expect(() => ship.setSail()).toThrowError('End of itinerary reached');
   });
 });
 
@@ -46,6 +61,8 @@ describe('dock', () => {
     const sf = new Port('San Francisco');
     const itinerary = new Itinerary([van, sf]);
     const ship = new Ship(itinerary);
+
+    ship.setSail();
     ship.dock();
 
     expect(ship.currentPort).toBe(sf);
