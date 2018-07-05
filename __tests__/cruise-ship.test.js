@@ -5,14 +5,26 @@ const Itinerary = require('../src/itinerary');
 
 describe('ship', () => {
   describe('with ports and an itinerary', () => {
-    let ship;
     let van;
     let sf;
     let itinerary;
+    let ship;
 
     beforeEach(() => {
-      van = new Port('Vancouver');
-      sf = new Port('San Francisco');
+      const port = {
+        removeShip: jest.fn(),
+        addShip: jest.fn(),
+      };
+      van = {
+        ...port,
+        name: 'Vancouver',
+        ships: [],
+      };
+      sf = {
+        ...port,
+        name: 'San Francisco',
+        ships: [],
+      };
       itinerary = new Itinerary([van, sf]);
       ship = new Ship(itinerary);
     });
@@ -26,15 +38,17 @@ describe('ship', () => {
     it('can set sail', () => {
       ship.setSail();
       expect(ship.currentPort).toBeFalsy();
+      expect(van.removeShip).toHaveBeenCalledWith(ship);
     });
     it('get added to port on instantiation', () => {
-      expect(van.ships).toContain(ship);
+
+      expect(van.addShip).toHaveBeenCalledWith(ship);
     });
     it('docks at a port', () => {
       ship.setSail();
       ship.dock();
       expect(ship.currentPort).toBe(sf);
-      expect(sf.ships).toContain(ship);
+      expect(sf.addShip).toHaveBeenCalledWith(ship);
     });
     it('it cant sail further than its itinerary', () => {
       ship.setSail();

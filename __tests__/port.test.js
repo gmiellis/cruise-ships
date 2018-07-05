@@ -3,15 +3,9 @@ const Port = require('../src/port');
 
 describe('port an port register', () => {
   let port;
-  let ship;
-  let titanic;
-  let qe2;
 
   beforeEach(() => {
     port = new Port('Vancouver');
-    ship = {};
-    titanic = {};
-    qe2 = {};
   });
 
   it('port can be instantiated', () => {
@@ -24,10 +18,13 @@ describe('port an port register', () => {
     expect(port).toHaveProperty('ships');
   });
   it('adds a ship to the ship property', () => {
+    const ship = jest.fn();
     port.addShip(ship);
     expect(port.ships).toContain(ship);
   });
   it('remove a ship from ship property', () => {
+    const titanic = jest.fn();
+    const qe2 = jest.fn();
     port.addShip(titanic);
     port.addShip(qe2);
     port.removeShip(qe2);
