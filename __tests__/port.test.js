@@ -1,50 +1,36 @@
 /* globals describe it expect */
 const Port = require('../src/port');
 
-describe('constructor', () => {
+describe('port an port register', () => {
+  let port;
+  let ship;
+  let titanic;
+  let qe2;
 
-  it('returns a port object', () => {
+  beforeEach(() => {
+    port = new Port('Vancouver');
+    ship = {};
+    titanic = {};
+    qe2 = {};
+  });
 
+  it('port can be instantiated', () => {
     expect(new Port('Vancouver')).toBeInstanceOf(Object);
   });
-
-  it('checks the port object has a name property', () => {
-
-    const port = new Port();
-
+  it('port object has a name propert', () => {
     expect(port).toHaveProperty('name');
   });
-
-  it('checks the port object has a ships property', () => {
-
-    const port = new Port();
-
+  it('port object has a ships property', () => {
     expect(port).toHaveProperty('ships');
   });
-});
-
-describe('methods', () => {
-
   it('adds a ship to the ship property', () => {
-
-    const port = new Port('Vancouver');
-    const ship = {};
-
     port.addShip(ship);
-
     expect(port.ships).toContain(ship);
   });
-
-  it('removes a ship from the ship property', () => {
-
-    const port = new Port('Vancouver');
-    const titanic = {};
-    const qe2 = {};
-
+  it('remove a ship from ship property', () => {
     port.addShip(titanic);
     port.addShip(qe2);
     port.removeShip(qe2);
-
     expect(port.ships).toEqual([titanic]);
   });
 });
