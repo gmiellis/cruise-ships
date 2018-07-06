@@ -38,6 +38,9 @@ describe('ship', () => {
       expect(ship.currentPort).toBe(van);
     });
     it('can set sail', () => {
+      const stormy = Object.create(global.Math);
+      global.Math = stormy;
+      stormy.random = () => 0.1;
       ship.setSail();
       expect(ship.currentPort).toBeFalsy();
       expect(van.removeShip).toHaveBeenCalledWith(ship);
@@ -47,15 +50,27 @@ describe('ship', () => {
       expect(van.addShip).toHaveBeenCalledWith(ship);
     });
     it('docks at a port', () => {
+      const stormy = Object.create(global.Math);
+      global.Math = stormy;
+      stormy.random = () => 0.3;
       ship.setSail();
       ship.dock();
       expect(ship.currentPort).toBe(sf);
       expect(sf.addShip).toHaveBeenCalledWith(ship);
     });
     it('it cant sail further than its itinerary', () => {
+      const stormy = Object.create(global.Math);
+      global.Math = stormy;
+      stormy.random = () => 0.2;
       ship.setSail();
       ship.dock();
       expect(() => ship.setSail()).toThrowError('End of itinerary reached');
+    });
+    it('cant set sail in stormy weather', () => {
+      const stormy = Object.create(global.Math);
+      global.Math = stormy;
+      stormy.random = () => 0.41;
+      expect(() => ship.setSail()).toThrowError('ITS TOO STORMY!!!!!');
     });
   });
 });

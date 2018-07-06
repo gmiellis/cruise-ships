@@ -17,6 +17,11 @@ Ship.prototype.setSail = function () {
     throw new Error('End of itinerary reached');
   }
 
+  const weather = Math.random();
+  if (weather >= 0.4) {
+    throw new Error('ITS TOO STORMY!!!!!');
+  };
+
   this.currentPort = itinerary.ports[currentPortIndex];
   this.currentPort.removeShip(this);
 
