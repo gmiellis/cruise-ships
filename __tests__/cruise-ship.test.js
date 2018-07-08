@@ -1,7 +1,5 @@
 /* globals describe it expect */
 const Ship = require('../src/cruise-ship');
-const Port = require('../src/port');
-const Itinerary = require('../src/itinerary');
 
 describe('ship', () => {
   describe('with ports and an itinerary', () => {
