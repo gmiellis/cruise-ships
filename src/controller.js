@@ -4,7 +4,6 @@
   function Controller(ship) {
     this.ship = ship;
     this.initialiseSea();
-    this.currentPort = null;
 
     document.querySelector('#sailbutton').addEventListener('click', () => {
       this.setSail();
@@ -55,19 +54,16 @@
       const ship = this.ship;
 
       const currentPortIndex = ship.itinerary.ports.indexOf(ship.currentPort);
-      //console.log(currentPortIndex);
-
       const nextPortIndex = currentPortIndex + 1;
-      //console.log(nextPortIndex);
-
       const nextPortElement = document.querySelector(`[data-port-index='${nextPortIndex}']`);
-      //console.log(nextPortElement);
 
       if (!nextPortElement) {
-        return alert('End of the line!');
+        return this.renderMessage('End of the Line!');
       }
 
+      this.hud();
       this.renderMessage(`Now departing ${ship.currentPort.name}`);
+      ship.setSail();
 
       const shipElement = document.querySelector('#ship');
       const sailInterval = setInterval(() => {
@@ -76,7 +72,9 @@
         if (shipLeft === (nextPortElement.offsetLeft - 32)) {
           ship.dock();
           clearInterval(sailInterval);
-          //this.renderMessage(`Now arriving at ${ship.currentPort.name}`);
+          this.renderMessage(`Now arriving at ${ship.currentPort.name}`);
+          this.hud();
+
         }
 
         shipElement.style.left = `${shipLeft + 1}px`;
@@ -93,6 +91,18 @@
       setTimeout(() => {
         viewport.removeChild(messageElement);
       }, 2500);
+    },
+    hud() {
+      const ship = this.ship;
+      const currentPortIndex = ship.itinerary.ports.indexOf(ship.currentPort);
+      const nextPortIndex = currentPortIndex + 1;
+
+      const hudOneElement = document.querySelector('#hud1');
+      hudOneElement.id = 'hud1';
+      hudOneElement.innerHTML = `Current Port: ${ship.currentPort.name}`;
+      const hudTwoElement = document.querySelector('#hud2');
+      hudTwoElement.id = 'hud2';
+      hudTwoElement.innerHTML = `Next Port: ${ship.itinerary.ports[nextPortIndex].name}`;
     },
   };
 

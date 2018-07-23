@@ -7,6 +7,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+#hud {
+    width: 100%;
+    font-family: 'Ruslan Display', cursive;
+    color: white;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    font-size: 2em;
 }
 
 #viewport {
